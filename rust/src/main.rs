@@ -6,10 +6,11 @@ use std::time;
 mod common;
 
 mod day01;
+mod day02;
 
 const SOLUTIONS: [Option<fn() -> ()>; 25] = [
     Some(day01::solution),
-    None,
+    Some(day02::solution),
     None,
     None,
     None,

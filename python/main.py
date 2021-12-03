@@ -2,11 +2,12 @@ import time
 
 import day01
 import day02
+import day03
 
 SOLUTIONS = [
     day01.solution,
     day02.solution,
-    None,
+    day03.solution,
     None,
     None,
     None,

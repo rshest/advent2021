@@ -1,5 +1,5 @@
-use std::str::FromStr;
 use crate::common;
+use std::str::FromStr;
 
 #[derive(Debug, PartialEq, Copy, Clone)]
 enum Command {
@@ -14,7 +14,7 @@ impl FromStr for Command {
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         let mut it = s.split(' ');
         let opstr: &str = it.next().ok_or(())?;
-        let val: i32 = it.next().ok_or(())?.parse::<i32>().map_err(|_|())?;
+        let val: i32 = it.next().ok_or(())?.parse::<i32>().map_err(|_| ())?;
         match opstr {
             "forward" => Ok(Command::Forward(val)),
             "up" => Ok(Command::Up(val)),
@@ -41,11 +41,16 @@ fn step2((x, depth, aim): (i32, i32, i32), cmd: &Command) -> (i32, i32, i32) {
 }
 
 pub(crate) fn solution() {
-    let commands: Vec<Command> = common::read_lines(&common::data_file(2)).unwrap()
-            .iter()
-            .filter_map(|line| line.parse().ok())
-            .collect();
+    let commands: Vec<Command> = common::read_lines(&common::data_file(2))
+        .unwrap()
+        .iter()
+        .filter_map(|line| line.parse().ok())
+        .collect();
     let pos1 = commands.iter().fold((0i32, 0i32), step1);
     let pos2 = commands.iter().fold((0i32, 0i32, 0i32), step2);
-    println!("Answer 1: {}\nAnswer 2: {}\n", pos1.0 * pos1.1, pos2.0 * pos2.1);
+    println!(
+        "Answer 1: {}\nAnswer 2: {}\n",
+        pos1.0 * pos1.1,
+        pos2.0 * pos2.1
+    );
 }

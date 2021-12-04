@@ -2,6 +2,8 @@ package day02
 
 import java.io.File
 
+import common.readInputLines
+
 enum class Command {
     forward, up, down
 }
@@ -32,7 +34,7 @@ fun step2(pos: Triple<Int, Int, Int>, cmdLine: Pair<Command, Int>): Triple<Int, 
 }
 
 fun solution() {
-    val commands = File("../data/02.txt").readLines().map {parseLine(it)}
+    val commands = readInputLines(2).map {parseLine(it)}
     val (a1, b1) = commands.fold(Pair(0, 0), ::step1)
     val (a2, b2) = commands.fold(Triple(0, 0, 0), ::step2)
     println("Answer 1: ${a1 * b1}\nAnswer 2: ${a2 * b2}")

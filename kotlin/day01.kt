@@ -2,8 +2,10 @@ package day01
 
 import java.io.File
 
+import common.readInputLines
+
 fun solution() {
-    val nums = File("../data/01.txt").readLines().map {it.toInt()}
+    val nums = readInputLines(1).map {it.toInt()}
 
     fun countIncr(nums: Iterable<Int>) = nums.windowed(2).filter {(a, b) -> a < b}.count()
 

@@ -55,5 +55,5 @@ pub(crate) fn solution() {
                 .collect()
         })
         .collect();
-    println!("Answer 1: {}\nAnswer 2: {}", part1(&nums), part2(&nums));
+    println!("Answer 1: {}\nAnswger 2: {}", part1(&nums), part2(&nums));
 }

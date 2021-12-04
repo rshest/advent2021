@@ -45,21 +45,21 @@ fn main() {
     for (i, solution) in SOLUTIONS.iter().enumerate() {
         println!("--- Day{:02} ---", i + 1);
         match solution {
-            None => println!("<TODO>\n"),
+            None => println!("<TODO>"),
             Some(f) => {
                 let now = time::Instant::now();
                 f();
                 let elapsed = now.elapsed();
                 timings.push(elapsed.as_micros());
-                println!("Elapsed: {:.2?}\n", elapsed);
+                println!("Elapsed: {:.2?}", elapsed);
                 total_elapsed += elapsed;
                 total_problems += 1;
             }
         }
     }
     println!(
-        "Total problems: {}, elapsed: {:.2?}",
-        total_problems, total_elapsed
+        "Total problems: {}, elapsed: {:.4?}s",
+        total_problems, total_elapsed.as_micros() as f64 / 1000000.0
     );
-    println!("\nProblem timings (mus): {:?}", timings);
+    println!("Problem timings (µs): {:?}", timings);
 }

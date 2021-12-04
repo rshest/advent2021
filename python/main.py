@@ -42,7 +42,7 @@ def main():
         problem_id = i + 1
         print(f'--- Day{problem_id:02} ---')
         if solution == None:
-            print('<TODO>\n')
+            print('<TODO>')
         else:
             start = time.time()
             solution()
@@ -51,10 +51,10 @@ def main():
             total_problems += 1
             total_elapsed += elapsed
             timings[i] = int(round(elapsed * 1000000.0))
-            print(f'Elapsed: {elapsed:.6f}s\n')
+            print(f'Elapsed: {timings[i]}µs')
 
-    print(f'Total problems: {total_problems}, elapsed: {total_elapsed:.2f}s')
-    print(f'\nProblem timings (mus): {timings}')
+    print(f'Total problems: {total_problems}, elapsed: {total_elapsed:.4f}s')
+    print(f'Problem timings (µs): {timings}')
 
 
 if __name__ == "__main__":

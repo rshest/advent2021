@@ -1,7 +1,4 @@
 package day02
-
-import java.io.File
-
 import common.readInputLines
 
 enum class Command {

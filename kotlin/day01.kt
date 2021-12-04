@@ -1,7 +1,4 @@
 package day01
-
-import java.io.File
-
 import common.readInputLines
 
 fun solution() {

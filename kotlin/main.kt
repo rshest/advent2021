@@ -2,12 +2,13 @@ import kotlin.system.measureNanoTime
 
 import day01.solution as solution01
 import day02.solution as solution02
+import day03.solution as solution03
 
 fun main() {
     val solutions = arrayOf(
         ::solution01,
         ::solution02,
-        null,
+        ::solution03,
         null,
     )
 

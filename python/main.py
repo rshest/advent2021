@@ -4,13 +4,14 @@ import day01
 import day02
 import day03
 import day04
+import day05
 
 SOLUTIONS = [
     day01.solution,
     day02.solution,
     day03.solution,
     day04.solution,
-    None,
+    day05.solution,
     None,
     None,
     None,

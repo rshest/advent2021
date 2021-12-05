@@ -4,6 +4,7 @@ import day01.solution as solution01
 import day02.solution as solution02
 import day03.solution as solution03
 import day04.solution as solution04
+import day05.solution as solution05
 
 fun main() {
     val solutions = arrayOf(
@@ -11,6 +12,7 @@ fun main() {
         ::solution02,
         ::solution03,
         ::solution04,
+        ::solution05,
     )
 
     var totalProblems = 0

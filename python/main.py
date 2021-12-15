@@ -14,6 +14,7 @@ import day11
 import day12
 import day13
 import day14
+import day15
 
 SOLUTIONS = [
     day01.solution,
@@ -30,8 +31,8 @@ SOLUTIONS = [
     day12.solution,
     day13.solution,
     day14.solution,
+    day15.solution,
 ]
-
 
 def main():
     total_problems = 0

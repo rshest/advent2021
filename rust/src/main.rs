@@ -12,8 +12,11 @@ mod day04;
 mod day05;
 mod day06;
 mod day07;
+mod day08;
+mod day09;
+mod day14;
 
-const SOLUTIONS: [Option<fn() -> ()>; 7] = [
+const SOLUTIONS: [Option<fn() -> ()>; 14] = [
     Some(day01::solution),
     Some(day02::solution),
     Some(day03::solution),
@@ -21,6 +24,13 @@ const SOLUTIONS: [Option<fn() -> ()>; 7] = [
     Some(day05::solution),
     Some(day06::solution),
     Some(day07::solution),
+    Some(day08::solution),
+    Some(day09::solution),
+    None,
+    None,
+    None,
+    None,
+    Some(day14::solution),
 ];
 
 fn main() {

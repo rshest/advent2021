@@ -43,7 +43,11 @@ fn part2(nums: &Vec<f64>) -> i32 {
 }
 
 pub(crate) fn solution() {
-    let line: String = common::read_lines(&common::data_file(7)).unwrap().first().unwrap().clone();
+    let line: String = common::read_lines(&common::data_file(7))
+        .unwrap()
+        .first()
+        .unwrap()
+        .clone();
     let nums: Vec<f64> = line.split(",").map(|x| x.parse::<f64>().unwrap()).collect();
     println!("Answer 1: {}\nAnswer 2: {}", part1(&nums), part2(&nums));
 }

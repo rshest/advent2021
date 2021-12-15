@@ -1,9 +1,9 @@
 use crate::common;
 
 extern crate num;
+use itertools::Itertools;
 use num::signum;
 use std::collections::HashMap;
-use itertools::Itertools;
 
 type Point = (i32, i32);
 type Line = (Point, Point);

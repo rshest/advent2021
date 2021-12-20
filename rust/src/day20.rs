@@ -1,4 +1,3 @@
-
 use crate::common;
 use std::collections::HashSet;
 
@@ -62,7 +61,10 @@ fn eval_pixels(start_pixels: &Pixels, lookup: &Lookup, steps: usize) -> usize {
 
 pub(crate) fn solution() {
     let lines = common::read_lines(&common::data_file(20)).unwrap();
-    let lookup: Lookup = lines[0].chars().map(|c| if c == '#' { 1 } else { 0 }).collect();
+    let lookup: Lookup = lines[0]
+        .chars()
+        .map(|c| if c == '#' { 1 } else { 0 })
+        .collect();
     let mut pixels: Pixels = HashSet::new();
     for (j, line) in lines[2..].iter().enumerate() {
         for (i, c) in line.chars().enumerate() {

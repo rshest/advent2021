@@ -16,6 +16,7 @@ mod day08;
 mod day09;
 mod day14;
 mod day15;
+mod day16;
 mod day18;
 mod day19;
 mod day20;
@@ -36,7 +37,7 @@ const SOLUTIONS: [Option<fn() -> ()>; 20] = [
     None,
     Some(day14::solution),
     Some(day15::solution),
-    None,
+    Some(day16::solution),
     None,
     Some(day18::solution),
     Some(day19::solution),
@@ -64,7 +65,8 @@ fn main() {
     }
     println!(
         "Total problems: {}, elapsed: {:.4?}s",
-        total_problems, total_elapsed.as_micros() as f64 / 1000000.0
+        total_problems,
+        total_elapsed.as_micros() as f64 / 1000000.0
     );
     println!("Problem timings (µs): {:?}", timings);
 }

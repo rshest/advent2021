@@ -1,7 +1,7 @@
 use crate::common;
 use std::fmt;
-use std::ptr;
 use std::iter::Peekable;
+use std::ptr;
 
 #[derive(PartialEq)]
 enum ReduceOp {
@@ -51,7 +51,7 @@ fn parse_sf_num<T: Iterator<Item = char>>(it: &mut Peekable<T>) -> Result<SFNum,
                     it.next();
                 }
                 return Ok(SFNum::Regular(num));
-            },
+            }
             '[' => {
                 it.next();
                 let a = parse_sf_num(it)?;
@@ -61,9 +61,13 @@ fn parse_sf_num<T: Iterator<Item = char>>(it: &mut Peekable<T>) -> Result<SFNum,
                 }
                 it.next();
                 return Ok(SFNum::Nested((Box::new(a), Box::new(b))));
-            },
-            ',' => { it.next(); },
-            _ if char::is_whitespace(c) => { it.next(); },
+            }
+            ',' => {
+                it.next();
+            }
+            _ if char::is_whitespace(c) => {
+                it.next();
+            }
             _ => return Err(format!("Invalid character: '{}'", c)),
         }
     }
@@ -82,8 +86,7 @@ fn reduce_num(num: &mut SFNum, can_split: bool) -> ReduceOp {
         if !ctx.prev_regular.is_null() {
             unsafe {
                 match *ctx.prev_regular {
-                    SFNum::Regular(prevn) =>
-                        *ctx.prev_regular = SFNum::Regular(val + prevn),
+                    SFNum::Regular(prevn) => *ctx.prev_regular = SFNum::Regular(val + prevn),
                     _ => {}
                 }
             }
@@ -105,19 +108,17 @@ fn reduce_num(num: &mut SFNum, can_split: bool) -> ReduceOp {
             return;
         }
         match num {
-            SFNum::Nested((a, b)) => {
-                match (&mut **a, &mut **b) {
-                    (SFNum::Regular(n0), SFNum::Regular(n1)) if depth >= 4 => {
-                        add_to_prev_regular(*n0, ctx);
-                        ctx.next_regular_inc = *n1;
-                        *num = SFNum::Regular(0);
-                        ctx.current_op = ReduceOp::Explode;
-                        return;
-                    },
-                    _ => {
-                        rec(a, depth + 1, ctx);
-                        rec(b, depth + 1, ctx);
-                    }
+            SFNum::Nested((a, b)) => match (&mut **a, &mut **b) {
+                (SFNum::Regular(n0), SFNum::Regular(n1)) if depth >= 4 => {
+                    add_to_prev_regular(*n0, ctx);
+                    ctx.next_regular_inc = *n1;
+                    *num = SFNum::Regular(0);
+                    ctx.current_op = ReduceOp::Explode;
+                    return;
+                }
+                _ => {
+                    rec(a, depth + 1, ctx);
+                    rec(b, depth + 1, ctx);
                 }
             },
             SFNum::Regular(n) => {
@@ -131,14 +132,14 @@ fn reduce_num(num: &mut SFNum, can_split: bool) -> ReduceOp {
                     } else {
                         *num = SFNum::Nested((
                             Box::new(SFNum::Regular(*n / 2)),
-                            Box::new(SFNum::Regular((*n + 1) / 2))
+                            Box::new(SFNum::Regular((*n + 1) / 2)),
                         ));
                         ctx.current_op = ReduceOp::Split;
                         return;
                     }
                 }
                 ctx.prev_regular = num;
-            },
+            }
         }
     }
     let mut ctx: Context = Context {
@@ -171,7 +172,8 @@ fn eval_nums(nums: &Vec<SFNum>) -> SFNum {
 
 pub(crate) fn solution() {
     let lines = common::read_lines(&common::data_file(18)).unwrap();
-    let sfnums: Vec<SFNum> = lines.iter()
+    let sfnums: Vec<SFNum> = lines
+        .iter()
         .map(|s| parse_sf_num(&mut s.chars().peekable()).unwrap())
         .collect();
     let res1 = eval_nums(&sfnums).magnitude();

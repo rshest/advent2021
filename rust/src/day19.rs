@@ -25,7 +25,7 @@ impl Vec3 {
     }
 
     fn cross(&self, other: &Vec3) -> Vec3 {
-        Vec3{
+        Vec3 {
             x: -other.y * self.z + self.y * other.z,
             y: other.x * self.z - self.x * other.z,
             z: -other.x * self.y + self.x * other.y,
@@ -66,15 +66,23 @@ impl Vec3 {
     }
 
     fn abs(&self) -> Vec3 {
-        Vec3 {x: self.x.abs(), y: self.y.abs(), z: self.z.abs()}
+        Vec3 {
+            x: self.x.abs(),
+            y: self.y.abs(),
+            z: self.z.abs(),
+        }
     }
 
     fn reverse(&self) -> Vec3 {
-        Vec3 {x: -self.x, y: -self.y, z: -self.z}
+        Vec3 {
+            x: -self.x,
+            y: -self.y,
+            z: -self.z,
+        }
     }
 
     fn zero() -> Vec3 {
-        Vec3 {x: 0, y: 0, z: 0}
+        Vec3 { x: 0, y: 0, z: 0 }
     }
 
     fn manhattan_dist(&self, other: &Vec3) -> i32 {
@@ -84,7 +92,9 @@ impl Vec3 {
 
 impl Mat3 {
     fn zero() -> Mat3 {
-        Mat3 {row: [Vec3::zero(), Vec3::zero(), Vec3::zero()] }
+        Mat3 {
+            row: [Vec3::zero(), Vec3::zero(), Vec3::zero()],
+        }
     }
 }
 
@@ -119,7 +129,12 @@ fn compute_dirs(coords: &Vec<Vec3>) -> HashMap<Vec3, (usize, usize)> {
     res
 }
 
-fn get_offset(coords1: &Vec<Vec3>, coords2: &Vec<Vec3>, dirs1: &DirMap, dirs2: &DirMap) -> Option<Vec3> {
+fn get_offset(
+    coords1: &Vec<Vec3>,
+    coords2: &Vec<Vec3>,
+    dirs1: &DirMap,
+    dirs2: &DirMap,
+) -> Option<Vec3> {
     let mut num_matching_dirs = 0;
     let mut candidate_point1 = 0;
     let mut candidate_points2 = vec![];
@@ -195,13 +210,14 @@ fn get_scanner_positions(data: &Vec<Vec<Vec3>>) -> Option<(Vec<Vec3>, Vec<Vec<Ve
                 &ctx.coords[&(j, 0)],
                 &ctx.coords[&(i, k)],
                 &ctx.dirs[&(j, 0)],
-                &ctx.dirs[&(i, k)]) {
+                &ctx.dirs[&(i, k)],
+            ) {
                 None => continue,
                 Some(offs) => {
-                    ctx.coords.insert((i, 0),
-                        ctx.coords[&(i, k)].iter()
-                            .map(|pt| pt.sub(&offs))
-                            .collect());
+                    ctx.coords.insert(
+                        (i, 0),
+                        ctx.coords[&(i, k)].iter().map(|pt| pt.sub(&offs)).collect(),
+                    );
                     ctx.dirs.insert((i, 0), compute_dirs(&ctx.coords[&(i, k)]));
                     ctx.found.insert(i);
                     ctx.to_find.remove(&i);
@@ -215,7 +231,9 @@ fn get_scanner_positions(data: &Vec<Vec<Vec3>>) -> Option<(Vec<Vec3>, Vec<Vec<Ve
     }
 
     while ctx.to_find.len() > 0 {
-        let pairs: Vec<(usize, usize)> = ctx.to_find.iter()
+        let pairs: Vec<(usize, usize)> = ctx
+            .to_find
+            .iter()
             .cartesian_product(ctx.found.iter())
             .map(|(i, j)| (*i, *j))
             .collect();
@@ -231,20 +249,31 @@ fn get_scanner_positions(data: &Vec<Vec<Vec3>>) -> Option<(Vec<Vec3>, Vec<Vec<Ve
             return None;
         }
     }
-    let data_tm = (0..data.len()).map(|i| ctx.coords[&(i, 0)].clone()).collect();
+    let data_tm = (0..data.len())
+        .map(|i| ctx.coords[&(i, 0)].clone())
+        .collect();
     let res = ctx.res;
     Some((res, data_tm))
 }
 
 pub(crate) fn solution() {
     let lines = common::read_lines(&common::data_file(19)).unwrap();
-    let mut data: Vec<Vec<Vec3>> = lines.split(|s| s.len() == 0)
-        .map(|lines|
-            lines[1..].iter().map(|line| {
-                let mut parts = line.split(",").map(|n| n.parse::<i32>().unwrap());
-                Vec3 {x: parts.next().unwrap(), y: parts.next().unwrap(), z: parts.next().unwrap()}
-            }).collect())
-    .collect();
+    let mut data: Vec<Vec<Vec3>> = lines
+        .split(|s| s.len() == 0)
+        .map(|lines| {
+            lines[1..]
+                .iter()
+                .map(|line| {
+                    let mut parts = line.split(",").map(|n| n.parse::<i32>().unwrap());
+                    Vec3 {
+                        x: parts.next().unwrap(),
+                        y: parts.next().unwrap(),
+                        z: parts.next().unwrap(),
+                    }
+                })
+                .collect()
+        })
+        .collect();
 
     if let Some((scanner_pos, data_tm)) = get_scanner_positions(&mut data) {
         let mut bpos: HashSet<Vec3> = HashSet::new();

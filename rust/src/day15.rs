@@ -54,7 +54,10 @@ fn get_min_risk(board: &Vec<Vec<u8>>, pos: (i32, i32), goal: (i32, i32)) -> usiz
             let cscore = score + get_risk(&board, cx, cy);
             if !scores.contains_key(&cpos) || scores[&cpos] > cscore {
                 scores.insert(cpos, cscore);
-                to_explore.push(Node { score: cscore, pos: cpos });
+                to_explore.push(Node {
+                    score: cscore,
+                    pos: cpos,
+                });
             }
         }
     }
@@ -63,11 +66,9 @@ fn get_min_risk(board: &Vec<Vec<u8>>, pos: (i32, i32), goal: (i32, i32)) -> usiz
 
 pub(crate) fn solution() {
     let lines = common::read_lines(&common::data_file(15)).unwrap();
-    let board: Vec<Vec<u8>> = lines.iter()
-        .map(|x| x.as_bytes()
-            .iter()
-            .map(|c| c - '0' as u8)
-            .collect())
+    let board: Vec<Vec<u8>> = lines
+        .iter()
+        .map(|x| x.as_bytes().iter().map(|c| c - '0' as u8).collect())
         .collect();
     let (w, h) = (board[0].len() as i32, board.len() as i32);
     let res1 = get_min_risk(&board, (0, 0), (w - 1, h - 1));

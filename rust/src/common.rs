@@ -23,3 +23,8 @@ const DATA_ROOT: &str = "../data/";
 pub fn data_file(problem_id: u32) -> String {
     format!("{}/{:02}.txt", DATA_ROOT, problem_id)
 }
+
+#[allow(dead_code)]
+pub fn test_file(problem_id: u32, test_id: u32) -> String {
+    format!("{}/{:02}t{}.txt", DATA_ROOT, problem_id, test_id)
+}

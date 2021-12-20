@@ -19,6 +19,7 @@ import day16
 import day17
 import day18
 import day19
+import day20
 
 SOLUTIONS = [
     day01.solution,
@@ -40,6 +41,7 @@ SOLUTIONS = [
     day17.solution,
     day18.solution,
     day19.solution,
+    day20.solution,
 ]
 
 def main():

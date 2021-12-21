@@ -20,6 +20,7 @@ import day17
 import day18
 import day19
 import day20
+import day21
 
 SOLUTIONS = [
     day01.solution,
@@ -42,7 +43,9 @@ SOLUTIONS = [
     day18.solution,
     day19.solution,
     day20.solution,
+    day21.solution,
 ]
+
 
 def main():
     total_problems = 0
@@ -50,9 +53,9 @@ def main():
     timings = []
     for (i, solution) in enumerate(SOLUTIONS):
         problem_id = i + 1
-        print(f'--- Day{problem_id:02} ---')
+        print(f"--- Day{problem_id:02} ---")
         if solution == None:
-            print('<TODO>')
+            print("<TODO>")
         else:
             start = time.time()
             solution()
@@ -61,10 +64,10 @@ def main():
             total_problems += 1
             total_elapsed += elapsed
             timings.append(int(round(elapsed * 1000000.0)))
-            print(f'Elapsed: {timings[i]}µs')
+            print(f"Elapsed: {timings[i]}µs")
 
-    print(f'Total problems: {total_problems}, elapsed: {total_elapsed:.4f}s')
-    print(f'Problem timings (µs): {timings}')
+    print(f"Total problems: {total_problems}, elapsed: {total_elapsed:.4f}s")
+    print(f"Problem timings (µs): {timings}")
 
 
 if __name__ == "__main__":

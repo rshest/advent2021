@@ -82,9 +82,9 @@ fn decode(packet: &str, pos: usize) -> (usize, Packet) {
     (
         cpos,
         Packet {
-            version: version,
-            packet_type: packet_type,
-            payload: payload,
+            version,
+            packet_type,
+            payload,
         },
     )
 }

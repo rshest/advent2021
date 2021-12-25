@@ -35,7 +35,7 @@ fn get_risk(board: &Vec<Vec<u8>>, x: i32, y: i32) -> usize {
 
 fn get_min_risk(board: &Vec<Vec<u8>>, pos: (i32, i32), goal: (i32, i32)) -> usize {
     let mut to_explore = BinaryHeap::new();
-    to_explore.push(Node { score: 0, pos: pos });
+    to_explore.push(Node { score: 0, pos });
 
     let mut scores = HashMap::new();
     scores.insert(pos, 0usize);

@@ -54,7 +54,7 @@ fn eval_pixels(start_pixels: &Pixels, lookup: &Lookup, steps: usize) -> usize {
     let need_invert = is_need_invert(&lookup);
     for i in 0..steps {
         let is_lit_set = !need_invert || (i % 2 == 0);
-        pixels = step(&pixels, &lookup, is_lit_set);
+        pixels = step(&pixels, lookup, is_lit_set);
     }
     pixels.len()
 }

@@ -146,7 +146,7 @@ fn reduce_num(num: &mut SFNum, can_split: bool) -> ReduceOp {
         prev_regular: ptr::null_mut(),
         next_regular_inc: 0,
         current_op: ReduceOp::None,
-        can_split: can_split,
+        can_split,
     };
     rec(num, 0, &mut ctx);
     ctx.current_op

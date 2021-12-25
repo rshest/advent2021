@@ -14,7 +14,7 @@ fn get_most_common<'a>(nums: impl Iterator<Item = &'a Vec<u8>>, pos: usize) -> u
     }
 }
 
-fn part1(nums: &Vec<Vec<u8>>) -> i64 {
+fn part1(nums: &[Vec<u8>]) -> i64 {
     let mut lc: i64 = 0;
     let mut mc: i64 = 0;
     for i in 0..nums[0].len() {
@@ -25,11 +25,11 @@ fn part1(nums: &Vec<Vec<u8>>) -> i64 {
     mc * lc
 }
 
-fn digits_to_decimal(digits: &Vec<u8>) -> i64 {
+fn digits_to_decimal(digits: &[u8]) -> i64 {
     digits.iter().fold(0i64, |v, d| v * 2 + *d as i64)
 }
 
-fn part2(nums: &Vec<Vec<u8>>) -> i64 {
+fn part2(nums: &[Vec<u8>]) -> i64 {
     let mut mnums: Vec<usize> = (0..nums.len()).collect();
     let mut lnums: Vec<usize> = (0..nums.len()).collect();
     for i in 0..nums[0].len() {

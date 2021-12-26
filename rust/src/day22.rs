@@ -103,13 +103,10 @@ fn get_lit_volume(ops: &Vec<Operation>, bound_region: Option<&Cuboid>) -> u64 {
 
     let mut grid: HashSet<(u16, u16, u16)> = HashSet::new();
     let mut vol: u64 = 0;
-    for (
-        idx,
-        Operation {
-            op_type,
-            extents: ext,
-        },
-    ) in ops.iter().enumerate()
+    for Operation {
+        op_type,
+        extents: ext,
+    } in ops.iter()
     {
         match bound_region {
             Some(b) => {
